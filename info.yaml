@@ -20,7 +20,7 @@ documentation:
   author:       "Emilian Miron"
   title:        "RiscV Scan Chain based CPU -- block 2 -- instructions"
   language:     "Verilog"
-  description:  ""
+  description:  "RiscV Scan Chain based CPU -- block 2 -- instructions"
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
