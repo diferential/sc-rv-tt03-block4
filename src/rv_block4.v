@@ -1,6 +1,6 @@
 `default_nettype none
 
-module diferential_rvb2 (
+module diferential_rvb4 (
   input [7:0] io_in,
   output [7:0] io_out
 );
