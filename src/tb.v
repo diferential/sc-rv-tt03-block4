@@ -26,7 +26,7 @@ module tb (
     assign segments = outputs[6:0];
 
     // instantiate the DUT
-    seven_segment_seconds seven_segment_seconds(
+    diferential_rvb1 diferential_rvb1(
         `ifdef GL_TEST
             .vccd1( 1'b1),
             .vssd1( 1'b0),
