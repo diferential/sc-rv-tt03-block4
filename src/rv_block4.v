@@ -121,8 +121,6 @@ module Scriv4Mailbox (
 	wire [5:0] _zz_c_state_cnt;
 	wire [3:0] switch_Scriv4Mailbox_l135;
 	wire when_StateMachine_l234;
-	reg [143:0] c_fsm_stateReg_string;
-	reg [143:0] c_fsm_stateNext_string;
 	Scriv4BB_RSFF ffSerDataIn(
 		.r(ffSerDataIn_r),
 		.s(ffSerDataIn_s),
@@ -138,21 +136,6 @@ module Scriv4Mailbox (
 		.s(ffSerDataDone_s),
 		.q(ffSerDataDone_q)
 	);
-	initial resetArea_cnt = {$urandom};
-	always @(*)
-		case (c_fsm_stateReg)
-			c_fsm_enumDef_stateSerialIn: c_fsm_stateReg_string = "stateSerialIn     ";
-			c_fsm_enumDef_stateChainOutput: c_fsm_stateReg_string = "stateChainOutput  ";
-			c_fsm_enumDef_stateOutsideOutput: c_fsm_stateReg_string = "stateOutsideOutput";
-			default: c_fsm_stateReg_string = "??????????????????";
-		endcase
-	always @(*)
-		case (c_fsm_stateNext)
-			c_fsm_enumDef_stateSerialIn: c_fsm_stateNext_string = "stateSerialIn     ";
-			c_fsm_enumDef_stateChainOutput: c_fsm_stateNext_string = "stateChainOutput  ";
-			c_fsm_enumDef_stateOutsideOutput: c_fsm_stateNext_string = "stateOutsideOutput";
-			default: c_fsm_stateNext_string = "??????????????????";
-		endcase
 	assign resetArea_rst_reached = &resetArea_cnt;
 	assign resetArea_not_rst_reached = !resetArea_rst_reached;
 	assign resetArea_rst_asserted = (io_tt_in & 8'hfe) == 8'hfe;
@@ -395,7 +378,7 @@ module Scriv4Mailbox (
 						c_fsm_outbox <= {c_fsm_outbox[20:0], c_fsm_outbox[27:21]};
 				default: begin
 					if (ffSerDataPresent_q)
-						c_fsm_inbox_storage <= {c_fsm_inbox_storage[27:1], ffSerDataIn_q};
+						c_fsm_inbox_storage <= {c_fsm_inbox_storage[26:0], ffSerDataIn_q};
 					if (io_inbox_valid)
 						case (switch_Scriv4Mailbox_l135)
 							4'b0001: c_state_cnt <= _zz_c_state_cnt;
